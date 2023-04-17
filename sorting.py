@@ -53,11 +53,49 @@ def selection_sort(rada, direction):
         return zprava
 
 
+def bubble_sort(elements):
+    swapped = False
+    # Looping from size of array from last index[-1] to index [0]
+    for n in range(len(elements) - 1, 0, -1):
+        for i in range(n):
+            if elements[i] > elements[i + 1]:
+                swapped = True
+                # swapping data if the element is less than next element in the array
+                elements[i], elements[i + 1] = elements[i + 1], elements[i]
+        if not swapped:
+            # exiting the function if we didn't make a single swap
+            # meaning that the array is already sorted.
+            return elements
+    return elements
+
+
+def insertion_sort(arr):
+    if (n := len(arr)) <= 1:
+        return
+    for i in range(1, n):
+
+        key = arr[i]
+
+        # Move elements of arr[0..i-1], that are
+        # greater than key, to one position ahead
+        # of their current position
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+
+
 def main():
     my_data = read_data("numbers.csv")
     print(my_data["series_1"])
-    cisla = selection_sort(my_data["series_1"], "pp")
-    print(cisla)
+    cisla = selection_sort(my_data["series_1"], "vz")
+    print(f"{cisla}: selection_sort")
+    bubble = bubble_sort(my_data["series_1"].copy())
+    print(f"{bubble}: bubble_sort")
+    insertion = insertion_sort(my_data["series_1"].copy())
+    print(f"{insertion}: insertion_sort")
     pass
 
 
